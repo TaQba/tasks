@@ -4,9 +4,9 @@ import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.context.config.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +25,12 @@ public class TaskController {
         return taskMapper.mapToTaskDtoList(service.getAllTask());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getTask")
-    public TaskDto getTask() {
-        return new TaskDto(1L, "Title", "content");
+    @RequestMapping(method = RequestMethod.GET, value = "getTask/{id}")
+    public TaskDto getTask(@PathVariable(value = "id") Long id) {
+        if (!service.existsTaskById(id)) {
+            throw new RuntimeException("Task id" + id + " not found.");
+        }
+        return taskMapper.mapToTaskDto(service.getTaskById(id));
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteTask")
