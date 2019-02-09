@@ -38,8 +38,11 @@ public class TrelloClient {
 
     private URI getUrl() {
          URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/" + trelloUsername + "/boards")
-                .queryParam("key", trelloAppKey)
-                .queryParam("token", trelloToken).build().encode().toUri();
+                 .queryParam("key", trelloAppKey)
+                 .queryParam("token", trelloToken)
+                 .queryParam("fields", "name,id")
+                 .queryParam("lists", "all")
+                 .build().encode().toUri();
         return url;
     }
 }
