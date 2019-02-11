@@ -35,7 +35,7 @@ public class TrelloClient {
             //return Optional.of(Arrays.asList(boardsResponse)).orElse(new ArrayList<>());
             return Arrays.asList(ofNullable(boardsResponse).orElse(new TrelloBoardDto[0]));
         } catch (RestClientException e) {
-            LOGGER.error(e.getMessage(),e);
+//            LOGGER.error(e.getMessage(),e);
             return new ArrayList<>();
         }
     }
