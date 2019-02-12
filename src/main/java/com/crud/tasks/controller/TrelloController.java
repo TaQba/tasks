@@ -18,6 +18,7 @@ public class TrelloController {
     @Autowired
     private TrelloClient trelloClient;
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "createdTrelloCard")
     public CreatedTrelloCard createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
         return trelloClient.createNewCard(trelloCardDto);
