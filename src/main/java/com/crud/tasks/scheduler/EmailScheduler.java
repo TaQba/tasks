@@ -22,11 +22,19 @@ public class EmailScheduler {
 
     @Scheduled(fixedDelay = 10000)
     public void sendInformationEmail() {
-        long size = taskRepository.count();
         simpleEmailService.send(new Mail(
                 adminConfig.getAdminMail(),
                 SUBJECT,
-                "CUrrent in database you got " + size + " tasks"
+                getMessage()
         ));
+    }
+
+    private String getMessage() {
+        long size = taskRepository.count();
+        String s = "";
+        if (size == 1) {
+            s = "s";
+        }
+        return "Current in database you got " + size + " task" + s;
     }
 }
