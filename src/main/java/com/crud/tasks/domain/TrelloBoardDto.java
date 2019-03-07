@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TrelloBoardDto {
     @JsonProperty("id")
