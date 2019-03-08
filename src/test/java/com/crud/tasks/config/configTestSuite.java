@@ -10,8 +10,10 @@ public class configTestSuite {
         //Given
         AdminConfig config = new AdminConfig();
         //When
+        String testEmail = "test@test.com";
+        config.setAdminMail(testEmail);
         //Then
-        Assert.assertNull(config.getAdminMail());
+        Assert.assertEquals(testEmail,config.getAdminMail());
     }
 
     @Test

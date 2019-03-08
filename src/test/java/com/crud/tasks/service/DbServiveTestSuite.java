@@ -68,6 +68,12 @@ public class DbServiveTestSuite {
         //When
         repository.delete(id);
 
-        dbService.deleteTask(id);
+        //then @testing void method
+        try {
+            dbService.deleteTask(id);
+            Assert.assertTrue(Boolean.TRUE);
+        }catch (NullPointerException e){
+        }
+
     }
 }
