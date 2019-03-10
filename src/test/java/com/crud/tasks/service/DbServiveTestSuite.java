@@ -66,7 +66,7 @@ public class DbServiveTestSuite {
         //Given
         Long id = 100L;
         //When
-        Task task = new Task(100L, "title", "Content");
+        Task task = new Task(id, "title", "Content");
         dbService.saveTask(task);
 
         //then @testing void method
