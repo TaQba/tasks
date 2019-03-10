@@ -39,7 +39,6 @@ public class emailSchedulerTestSuite {
         //then
         try{
             emailScheduler.sendInformationEmail();
-            Assert.assertTrue(Boolean.TRUE);
         }catch (MailException e){
         }
     }

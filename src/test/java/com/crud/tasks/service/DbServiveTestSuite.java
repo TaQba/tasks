@@ -64,16 +64,14 @@ public class DbServiveTestSuite {
     @Test
     public void shouldDeleteOne() {
         //Given
-        Long id = 1L;
+        Long id = 100L;
         //When
-        repository.delete(id);
+        Task task = new Task(100L, "title", "Content");
+        dbService.saveTask(task);
 
         //then @testing void method
-        try {
-            dbService.deleteTask(id);
-            Assert.assertTrue(Boolean.TRUE);
-        }catch (NullPointerException e){
-        }
+        dbService.deleteTask(id);
+        Assert.assertNull(dbService.getTask(id));
 
     }
 }
