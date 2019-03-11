@@ -22,14 +22,15 @@ public class EmailScheduler {
 
     @Scheduled(fixedDelay = 10000)
     public void sendInformationEmail() {
-//        simpleEmailService.send(new Mail(
-//                adminConfig.getAdminMail(),
-//                SUBJECT,
-//                getMessage()
-//        ));
+        simpleEmailService.send(new Mail(
+                adminConfig.getAdminMail(),
+                "",
+                SUBJECT,
+                getMessage()
+        ));
     }
 
-    private String getMessage() {
+    public String getMessage() {
         long size = taskRepository.count();
         String s = "";
         if (size == 1) {
