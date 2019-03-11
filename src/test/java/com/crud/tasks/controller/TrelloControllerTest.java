@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
+import org.mockito.Matchers;
 import org.mockito.Mockito;
 import org.mockito.internal.progress.ArgumentMatcherStorage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,8 +88,7 @@ public class TrelloControllerTest {
                 "Test",
                 "http://tets.com"
         );
-        when(trelloFacade.createdCard(Mockito.any(TrelloCardDto.class))).thenReturn(createdTrelloCardDto);
-//        when(trelloFacade.createdCard(ArgumentMatchers.any(TrelloCardDto.class))).thenReturn(createdTrelloCardDto);
+        when(trelloFacade.createdCard(Matchers.any(TrelloCardDto.class))).thenReturn(createdTrelloCardDto);
 
         Gson gson = new Gson();
         String jsonContent = gson.toJson(trelloCardDto);
