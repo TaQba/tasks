@@ -74,12 +74,10 @@ public class TaskControllerTest {
                 .andExpect(jsonPath("$[1].id", is(2)));
     }
 
-    // Potrzebuję tu Pomocy !!!
-    // Za choinke MOCK nie zwraca JSON'a
     @Test
     public void shouldFetchTask() throws Exception {
-        Optional<Task> task = Optional.of(new Task(1L, "Title", "Content"));
         Task task1 = new Task(1L, "Title", "Content");
+        Optional<Task> task = Optional.of(task1);
         TaskDto taskDto = new TaskDto(1L, "Title", "Content");
         //When & Then
         when(dbService.getTask(1L)).thenReturn(task);
@@ -88,8 +86,9 @@ public class TaskControllerTest {
         mockMvc.perform(get("/v1/task/getTask?taskId=1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-//                .andExpect(jsonPath("$", hasSize(0)))
-                .andDo(print());
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.content", is("Content")))
+                .andExpect(jsonPath("$.title", is("Title")));
     }
 
     @Test
@@ -123,15 +122,14 @@ public class TaskControllerTest {
         .andExpect(status().isOk());
     }
 
-    // Potrzebuję tu Pomocy !!!
-    // Za choinke MOCK nie zwraca JSON'a
     @Test
     public void shouldUpdateTask() throws Exception {
-        TaskDto taskDto  = new TaskDto(1L, "Title", "Content");
+        TaskDto taskDto = new TaskDto(1L, "Title", "Content");
         Task task = new Task(1L, "Title", "Content");
 
-//        when(taskMapper.mapToTask(Matchers.any(TaskDto.class))).thenReturn(task);
-        when(dbService.saveTask(Matchers.any(Task.class))).thenReturn(task);
+        when(taskMapper.mapToTask(taskDto)).thenReturn(task);
+        when(dbService.saveTask(task)).thenReturn(task);
+        when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
         Gson gson = new Gson();
         String json = gson.toJson(taskDto);
 
@@ -139,10 +137,10 @@ public class TaskControllerTest {
                 MockMvcRequestBuilders.put("/v1/task/updateTask")
                         .content(json)
                         .contentType(MediaType.APPLICATION_JSON)
-                )
-                // to tylko do pokazania ze nie ma Body
-//                .andExpect(status().isOk());
-                .andExpect(status().isCreated());
+        )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.content", is("Content")))
+                .andExpect(jsonPath("$.title", is("Title")));
     }
-
 }
