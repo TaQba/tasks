@@ -20,6 +20,7 @@ public class TrelloFacade {
 
     @Autowired
     private TrelloMapper trelloMapper;
+
     @Autowired
     private TrelloValidator trelloValidator;
 
