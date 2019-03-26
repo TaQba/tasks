@@ -11,29 +11,29 @@ import org.springframework.mail.javamail.JavaMailSender;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
-public class SimpleEmailServiceTest {
-    @InjectMocks
-    private SimpleEmailService simpleEmailService;
-
-    @Mock
-    private JavaMailSender javaMailSender;
-
-    @Test
-    public void shouldSendEmail() {
-        //Given
-        Mail mail = new Mail("jakub.tadych@yahoo.com",
-                "jt@gmail.com","Test", "Test Message");
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setTo(mail.getMailTo());
-        simpleMailMessage.setCc(mail.getToCc());
-        simpleMailMessage.setSubject(mail.getSubject());
-        simpleMailMessage.setText(mail.getMessage());
-
-        //When
-        simpleEmailService.send(mail);
-
-        //Then
-        verify(javaMailSender, times(1)).send(simpleMailMessage);
-    }
-}
+//@RunWith(MockitoJUnitRunner.class)
+//public class SimpleEmailServiceTest {
+//    @InjectMocks
+//    private SimpleEmailService simpleEmailService;
+//
+//    @Mock
+//    private JavaMailSender javaMailSender;
+//
+//    @Test
+//    public void shouldSendEmail() {
+//        //Given
+//        Mail mail = new Mail("jakub.tadych@yahoo.com",
+//                "jt@gmail.com","Test", "Test Message");
+//        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+//        simpleMailMessage.setTo(mail.getMailTo());
+//        simpleMailMessage.setCc(mail.getToCc());
+//        simpleMailMessage.setSubject(mail.getSubject());
+//        simpleMailMessage.setText(mail.getMessage());
+//
+//        //When
+//        simpleEmailService.send(mail);
+//
+//        //Then
+//        verify(javaMailSender, times(1)).send(simpleMailMessage);
+//    }
+//}
